@@ -565,9 +565,16 @@ jQuery.trumbowyg = {
 
                     if (e.ctrlKey && (e.which === 89 || e.which === 90)) {
                         t.$c.trigger('tbwchange');
-                    } else if (!ctrl && e.which !== 17 && !composition) {
-                        t.semanticCode(false, e.which === 13);
-                        t.$c.trigger('tbwchange');
+                    } else if (!ctrl && e.which !== 17) {
+                        if (composition) {
+                            if (e.which === 13) {
+                                t.semanticCode(false, false);
+                                t.$c.trigger('tbwchange');
+                            }
+                        } else {
+                            t.semanticCode(false, e.which === 13);
+                            t.$c.trigger('tbwchange');
+                        }
                     }
 
                     setTimeout(function () {
